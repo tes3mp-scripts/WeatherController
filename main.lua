@@ -145,7 +145,9 @@ customEventHooks.registerHandler("OnServerPostInit", Weather.OnServerPostInit)
 function Weather.OnPlayerCellChange(eventStatus, pid)
     if eventStatus.validCustomHandlers then
         local region = string.lower(tes3mp.GetRegion(pid))
-        WorldInstance:LoadRegionWeather(region, pid, false, true)
+        if region ~= "" then
+            WorldInstance:LoadRegionWeather(region, pid, false, true)
+        end
     end
 end
 
