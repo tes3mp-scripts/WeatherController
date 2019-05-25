@@ -99,7 +99,12 @@ end
 
 function Weather.getTimerDuration()
     local roll = Weather.getRandom()
-    local frametimeMultiplier = WorldInstance.data.time.timeScale / WorldInstance.defaultTimeScale
+    if WorldInstance.data.time.dayTimeScale ~= nil and WorldInstance.data.time.nightTimeScale ~= nil then
+       local frametimeMultiplier = ((WorldInstance.data.time.dayTimeScale + WorldInstance.data.time.nightTimeScale)
+             / 2) / WorldInstance.defaultTimeScale
+    else
+        local frametimeMultiplier = WorldInstance.defaultTimeScale
+    end
     local hours = Weather.config.minDuration + (Weather.config.maxDuration - Weather.config.minDuration) * roll
     return hours * frametimeMultiplier * 60 * 1000
 end
