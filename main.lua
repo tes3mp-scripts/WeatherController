@@ -98,8 +98,9 @@ end
 
 
 function Weather.getTimerDuration()
+    local frametimeMultiplier = WorldInstance:GetCurrentTimeScale() / WorldInstance.defaultTimeScale
+
     local roll = Weather.getRandom()
-    local frametimeMultiplier = WorldInstance.data.time.timeScale / WorldInstance.defaultTimeScale
     local hours = Weather.config.minDuration + (Weather.config.maxDuration - Weather.config.minDuration) * roll
     return hours * frametimeMultiplier * 60 * 1000
 end
